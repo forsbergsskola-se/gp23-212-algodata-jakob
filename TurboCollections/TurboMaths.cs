@@ -17,6 +17,12 @@ public static class TurboMaths
 
     public static List<int> GetEvenNumbersList(int maxNumber)
     {
-        
+        List<int> evenList = new List<int>();
+        for (int i = 0; i < maxNumber; i++)
+        {
+            evenList.Add(i);
+        }
+
+        return evenList;
     }
 }

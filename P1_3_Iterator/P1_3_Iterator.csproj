@@ -8,5 +8,9 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TurboCollections\TurboCollections.csproj" />
+    </ItemGroup>
+
 
 </Project>
