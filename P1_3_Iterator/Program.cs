@@ -20,7 +20,7 @@ foreach (int number in numbers)
 Console.WriteLine($" the sum is : {sum}");
 
 Console.WriteLine("Even Numbers List: ");
-foreach (int number in TurboMaths.GetEvenNumbersList(12))
+foreach (int number in TurboMaths.GetEvenNumbersList(1000000))
 {
     Console.WriteLine($"{number}");
 }
