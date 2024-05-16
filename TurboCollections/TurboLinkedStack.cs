@@ -20,16 +20,17 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
         LastNode = newNode;
     }
 
-    public T Peek() {
-        throw new NotImplementedException();
-        // Return the Value of Last Node here.
+    public T Peek()
+    {
+        return LastNode.Value;
     }
 
     public T Pop()
     {
-        throw new NotImplementedException();
         // 1. Save the Last Node locally so we can return the value later.
+        T localNode = Peek();
         // 2. Now, assign the Last Node's Previous Node to be the Last Node.
+        LastNode = LastNode.Previous;
         // -- This effectively removes the previously Last Node of the Stack
         // -- Imagine LastNode is customer 436
         // -- -- who remembered that customer 435 was before him.
@@ -38,6 +39,7 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
         // -- -- But he has no memory of customer 436.
 
         // Now, return the Value of the Node that you cached in Step 1.
+        return localNode;
     }
 
     public void Clear() {
