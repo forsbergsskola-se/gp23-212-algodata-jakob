@@ -36,14 +36,35 @@ public class TurboLinkedQueue<T> : ITurboQueue<T>
 
     public void Enqueue(T value)
     {
+        Node newNode = new()
+        {
+            Value = value,
+            Next = null
+        };
+        if (FirstNode == null)
+        {
+            FirstNode = newNode;
+        }
+
+        else
+        {
+            var customer = FirstNode;
+            while (customer.Next != null)
+            {
+                customer = customer.Next
+            }
+        }
+    }
+}
+    
+    
+    
         // This is a bit more complicated. You need to let the last Node in the Queue know who's next after him.
         // No other choice but looping through your Nodes until you reach the end.
         // You know that you've reached the end, if the current Node's Next Node is null.
         // Then, you assign a new Node containing the value to the current node's Next field.
-
-        // Analogy: In our store, we always remember who's the first that arrived. When a new customer arrives, we tell the last customer, that the new customer will be after them.
-        // However, we only know, who's the first customer. And each customer knows, who comes after them. So we continue asking each customer, who comes after them, until one says: "No one! I'm last in the Queue" and we can tell them: "Not anymore! This new customer is now last in the queue"
-    }
+        
+    
 
     // Everything else is super similar to the TurboLinkedStack!
 }
