@@ -5,8 +5,7 @@ public class TurboLinkedStackTests
     [Test]
     public void TestPush()
     {
-        var stack = new TurboLinkedStack<int>();
-
+        
     }
     
     [Test]
