@@ -2,8 +2,10 @@
 
 namespace  TurboCollections;
 
-public class TurboLinkedStack<T> : IEnumerable<T> {
-    class Node {
+public class TurboLinkedStack<T> : IEnumerable<T> 
+{
+    class Node 
+    {
         public T Value;
         public Node Previous;
     }
@@ -42,7 +44,8 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
         return localNode;
     }
 
-    public void Clear() {
+    public void Clear() 
+    {
         // This one is incredibly easy. Just assign null to Field LastNode
         LastNode = null;
         // -- This is like pretending you never new that there is any last customer.
@@ -56,8 +59,11 @@ public class TurboLinkedStack<T> : IEnumerable<T> {
             // But instead of Printing Nodes, you just count how many Nodes you have visited
             // Similar to this:
             int count = 0;
-            while(false/* remove false and replace with correct condition...*/){
+            Node counting = LastNode;
+            while(counting != null)
+            {
                 count++;
+                counting = counting.Previous;
             }
             return count;
         }
