@@ -7,9 +7,9 @@ public static class TurboMaths
         Console.WriteLine($"Hello, I'm {typeof(TurboMaths).FullName}");
     }
 
-    public static IEnumerable<int> GetEvenNumbers(int maxNubmer)
+    public static IEnumerable<int> GetEvenNumbers(int maxNumber)
     {
-        for (int i = 0; i <= maxNubmer; i+= 2)
+        for (int i = 0; i <= maxNumber; i+= 2)
         {
             yield return i;
         }
