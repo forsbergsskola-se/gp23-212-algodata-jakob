@@ -59,20 +59,25 @@ public class TurboLinkedStack<T> : IEnumerable<T>
             // But instead of Printing Nodes, you just count how many Nodes you have visited
             // Similar to this:
             int count = 0;
-            Node counting = LastNode;
-            while(counting != null)
+            Node lastNode = LastNode;
+            while(lastNode != null)
             {
                 count++;
-                counting = counting.Previous;
+                lastNode = lastNode.Previous;
             }
             return count;
         }
     }
 
     // Iterate over all nodes and yield return the current node's value
-    public IEnumerator<T> GetEnumerator() {
-        throw new NotImplementedException();
+    public IEnumerator<T> GetEnumerator() 
+    {
         Node current = LastNode;
+        while (current != null)
+        {
+            yield return current.Value;
+            current = current.Previous;
+        }
         // Now, while the current node is not null, do:
         //     yield return the current node's value
         //     then, assign the current node's previous Node to current
