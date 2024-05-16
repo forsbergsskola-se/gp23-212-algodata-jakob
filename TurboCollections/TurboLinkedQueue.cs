@@ -51,9 +51,16 @@ public class TurboLinkedQueue<T> : ITurboQueue<T>
             var customer = FirstNode;
             while (customer.Next != null)
             {
-                customer = customer.Next
+                customer = customer.Next;
             }
+
+            customer.Next = newNode;
         }
+    }
+
+    public T Peek()
+    {
+        
     }
 }
     
