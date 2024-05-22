@@ -71,7 +71,9 @@ public class TurboLinkedQueue<T> : ITurboQueue<T>
 
     public T Dequeue() // returns the item in the front of the queue and removes it at the same time.
     {
-        
+        var temp = FirstNode;
+        FirstNode = temp.Next;
+        return temp.Value;
 
     }
 
