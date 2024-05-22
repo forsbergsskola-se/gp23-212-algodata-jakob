@@ -64,7 +64,8 @@ public class TurboLinkedQueue<T> : ITurboQueue<T>
 
     public T Peek() // returns the item in the front of the queue without removing it.
     {
-        
+        if (FirstNode == null)
+            throw new InvalidOperationException("The queue is empty.");
         return FirstNode.Value;
     }
 
