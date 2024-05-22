@@ -9,8 +9,8 @@ public interface ITurboQueue<T> : IEnumerable<T> {
     void Clear(); // removes all items from the queue.
 }
 
-public class TurboLinkedQueue<T> : ITurboQueue<T>
 
+public class TurboLinkedQueue<T> : ITurboQueue<T>
 {
     class Node {
         public T Value;
