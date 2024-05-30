@@ -1,7 +1,7 @@
 ﻿namespace TurboCollections.Test;
 
 [TestFixture]
-public class TurboBinarySearchTree
+public class TurboBSTTEst
 {
     
 }
