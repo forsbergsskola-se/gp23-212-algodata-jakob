@@ -127,28 +127,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             {
                 parent.RightChild = null; // Node is right child
             }
-
-            // Traverse all children of the subtree and insert them back into the tree
-            DeleteHelper(current.LeftChild);
-            DeleteHelper(current.RightChild);
-
-            return true; // Node deleted successfully
-        }
-
-        // Helper method to traverse all children of the node and insert them back into the tree
-        private void DeleteHelper(Node node)
-        {
-            if (node == null)
-            {
-                return; //if node is null
-            }
-
-            // Insert the current node back into the tree
-            Insert(node.Value);
-
-            // Recursively traverse and insert the left and right children
-            DeleteHelper(node.LeftChild);
-            DeleteHelper(node.RightChild);
+            return true; // Node deleted
         }
         
         //ITERATOR PATTERNS:
