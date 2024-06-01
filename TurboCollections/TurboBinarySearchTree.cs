@@ -24,47 +24,34 @@
             root = null; //Sets the root to null
             this.comparer = comparer;
         }
-
-
+        
         public void Insert(T value)
         {
-            if (root == null)
+            root = Insert(root, value);
+        }
+
+        private Node<T> Insert(Node<T> node, T value)
+        {
+            // If the current node is null, create a new node with the given value
+            if (node == null)
             {
-                root = new Node<T>(value);  // Creates a node if the tree is empty
-                return;
+                return new Node<T>(value);
             }
-            
-            // Start process starting from the root
-            Node<T> current = root;
-            while (true)
+
+            // Compare the value with the current node's value
+            if (comparer.Compare(value, node.Value) > 0)
             {
-                //Compare value with the current nodes value
-                if (comparer.Compare(value, current.Value) > 0)
-                {
-                    //if the value is greater, move to he right side of the tree
-                    if (current.RightChild == null)
-                    {
-                        current.RightChild = new Node<T>(value);  //if there is no node on the right side, create one
-                        break;
-                    }
-                    else
-                    {
-                        current = current.RightChild; //if there already is a right child, move to it for further traversal.
-                    }
-                }
-                else
-                {
-                    if (current.LeftChild == null)
-                    {
-                        current.LeftChild = new Node<T>(value);  // same functions only on the opposite side
-                        break;
-                    }
-                    else
-                    {
-                        current = current.LeftChild;
-                    }
-                }
+                // If the value is greater, put it in the right tree
+                node.RightChild = Insert(node.RightChild, value);
             }
+            else
+            {
+                // If the value is less or equal, put it in the left tree
+                node.LeftChild = Insert(node.LeftChild, value);
+            }
+
+            // Return the updated node
+            return node;
         }
 
 
