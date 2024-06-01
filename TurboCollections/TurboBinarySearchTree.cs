@@ -68,7 +68,8 @@
                     return true;
                 }
                 
-                //if the value is greater than current nodes value, it gets move to the right side
+                //if the value is greater than current nodes value, it gets move to the right side,
+                //similar to the insert method
                 else if (comparer.Compare(value, current.Value) > 0)
                 {
                     current = current.RightChild;
