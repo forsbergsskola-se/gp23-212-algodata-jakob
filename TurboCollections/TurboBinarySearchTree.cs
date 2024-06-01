@@ -20,8 +20,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
         
         private Node<T> root; //root node for the tree
         private Comparer<T> comparer; //comparing value types of T
-        private IEnumerable<T> _enumerableImplementation;
-
+        
         public TurboBinarySearchTree(Comparer<T> comparer)
         {
             root = null; //Sets the root to null
@@ -65,6 +64,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
              // it continues searching until the current node is null   
             while (current != null)
             {
+                int comparison = comparer.Compare(value, current.Value);
                 //if the current node has a value return true
                 if (comparer.Compare(value, current.Value) == 0)
                 {
@@ -125,10 +125,32 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             {
                 parent.RightChild = null; // Node is right child
             }
+
+            // Traverse all children of the subtree and insert them back into the tree
+            DeleteHelper(current.LeftChild);
+            DeleteHelper(current.RightChild);
+
             return true; // Node deleted successfully
         }
 
-       
+        // Helper method to traverse all children of the node and insert them back into the tree
+        private void DeleteHelper(Node<T> node)
+        {
+            if (node == null)
+            {
+                return; //if node is null
+            }
+
+            // Insert the current node back into the tree
+            Insert(node.Value);
+
+            // Recursively traverse and insert the left and right children
+            DeleteHelper(node.LeftChild);
+            DeleteHelper(node.RightChild);
+        }
+
+
+
     }
 
     
