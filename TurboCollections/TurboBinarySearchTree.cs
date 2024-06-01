@@ -4,11 +4,11 @@ namespace TurboCollections;
 
 public class TurboBinarySearchTree<T> : IEnumerable<T>
     {
-        private class Node <T>
+        private class Node
         {
             public T Value;
-            public Node <T> LeftChild;
-            public Node <T> RightChild;
+            public Node LeftChild;
+            public Node RightChild;
 
             public Node(T value)
             {
@@ -17,27 +17,27 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
                 RightChild = null;
             }
         }
+        private Node root; //root node for the tree
+        private Comparer comparer; //comparing value types of T
         
-        private Node<T> root; //root node for the tree
-        private Comparer<T> comparer; //comparing value types of T
-        
-        public TurboBinarySearchTree(Comparer<T> comparer)
+        public TurboBinarySearchTree(Comparer comparer)
         {
             root = null; //Sets the root to null
             this.comparer = comparer;
         }
         
+        //INSERT METHOD
         public void Insert(T value)
         {
             root = InsertHelper(root, value);
         }
 
-        private Node<T> InsertHelper(Node<T> node, T value)
+        private Node InsertHelper(Node node, T value)
         {
             // If the current node is null, create a new node with the given value
             if (node == null)
             {
-                return new Node<T>(value);
+                return new Node(value);
             }
 
             // Compare the value with the current node's value
@@ -56,10 +56,11 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             return node;
         }
 
+        //SEARCH METHOD
         public bool Search(T value)
         {
             //Start searching from the root node
-            Node<T> current = root;
+            Node current = root;
             
              // it continues searching until the current node is null   
             while (current != null)
@@ -88,11 +89,12 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             return false;
         }
 
+        //DELETE METHOD:
         public bool Delete(T value)
         {
             // Find the node to delete and its parent
-            Node<T> parent = null;
-            Node<T> current = root;
+            Node parent = null;
+            Node current = root;
             while (current != null && comparer.Compare(current.Value, value) != 0)
             {
                 parent = current;
@@ -134,7 +136,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
         }
 
         // Helper method to traverse all children of the node and insert them back into the tree
-        private void DeleteHelper(Node<T> node)
+        private void DeleteHelper(Node node)
         {
             if (node == null)
             {
@@ -148,9 +150,39 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             DeleteHelper(node.LeftChild);
             DeleteHelper(node.RightChild);
         }
-
-
-
+        
+        //ITERATOR PATTERNS:
+        
+        // Inorder traversal method
+        private IEnumerable<T> InOrderTraversal(Node node)
+        {
+            if (node == null)
+                yield break;
+            {
+                // Traverse the left subtree
+                foreach (var n in InOrderTraversal(node.LeftChild))
+                    yield return n;
+                
+                // Yield the current node's value
+                yield return node.Value;
+                
+                // Traverse the right subtree
+                foreach (var n in InOrderTraversal(node.RightChild))
+                    yield return n;
+            }
+            
+        }
+        
+        //  implementing inorder traversal
+        public IEnumerator<T> GetEnumerator()
+        {
+            return InOrderTraversal(root).GetEnumerator();
+        }
+        
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 
     
