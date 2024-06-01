@@ -56,7 +56,32 @@
 
         public bool Search(T value)
         {
+            //Start searching from the root node
+            Node<T> current = root;
             
+             // it continues searching until the current node is null   
+            while (current != null)
+            {
+                //if the current node has a value return true
+                if (comparer.Compare(value, current.Value) == 0)
+                {
+                    return true;
+                }
+                
+                //if the value is greater than current nodes value, it gets move to the right side
+                else if (comparer.Compare(value, current.Value) > 0)
+                {
+                    current = current.RightChild;
+                }
+                
+                else
+                {
+                    //if not moves to the left side
+                    current = current.LeftChild;
+                }
+            }
+            // it returns false if the value is not found when traversing the tree
+            return false;
         }
 
 
