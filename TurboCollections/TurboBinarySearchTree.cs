@@ -54,6 +54,11 @@
             return node;
         }
 
+        public bool Search(T value)
+        {
+            
+        }
+
 
     }
 
