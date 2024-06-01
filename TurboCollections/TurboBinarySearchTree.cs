@@ -88,7 +88,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             // it returns false if the value is not found when traversing the tree
             return false;
         }
-
+        
         //DELETE METHOD:
         public bool Delete(T value)
         {
@@ -127,8 +127,10 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
             {
                 parent.RightChild = null; // Node is right child
             }
-            return true; // Node deleted
+
+            return true; // Node found and deleted 
         }
+
         
         //ITERATOR PATTERNS:
         
