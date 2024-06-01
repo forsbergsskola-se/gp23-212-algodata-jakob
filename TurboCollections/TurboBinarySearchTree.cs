@@ -1,11 +1,17 @@
 ﻿namespace TurboCollections;
 
-public class TurboBinarySearchTree
-{
-    class Node
+    public class Node <T>
     {
-        public int value;
-        public Node left;
-        public Node Right;
+        public T Value;
+        public Node <T> Left;
+        public Node <T> Right;
+
+        public Node(T value)
+        {
+            Value = value;
+            Left = null;
+            Right = null;
+        }
     }
-}
+
+public 
