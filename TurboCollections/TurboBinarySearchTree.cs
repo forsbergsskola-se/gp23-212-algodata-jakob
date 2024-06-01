@@ -27,10 +27,10 @@
         
         public void Insert(T value)
         {
-            root = Insert(root, value);
+            root = InsertDirection(root, value);
         }
 
-        private Node<T> Insert(Node<T> node, T value)
+        private Node<T> InsertDirection(Node<T> node, T value)
         {
             // If the current node is null, create a new node with the given value
             if (node == null)
@@ -42,12 +42,12 @@
             if (comparer.Compare(value, node.Value) > 0)
             {
                 // If the value is greater, put it in the right tree
-                node.RightChild = Insert(node.RightChild, value);
+                node.RightChild = InsertDirection(node.RightChild, value);
             }
             else
             {
                 // If the value is less or equal, put it in the left tree
-                node.LeftChild = Insert(node.LeftChild, value);
+                node.LeftChild = InsertDirection(node.LeftChild, value);
             }
 
             // Return the updated node
