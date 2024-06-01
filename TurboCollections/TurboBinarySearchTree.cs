@@ -18,6 +18,7 @@
     {
         private Node<T> root; //root node for the tree
         private Comparer<T> comparer; //comparing value types of T
+        private IEnumerable<T> _enumerableImplementation;
 
         public TurboBinarySearchTree(Comparer<T> comparer)
         {
@@ -83,6 +84,11 @@
             }
             // it returns false if the value is not found when traversing the tree
             return false;
+        }
+
+        public bool Delete(T value)
+        {
+            
         }
 
 
