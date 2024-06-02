@@ -65,7 +65,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
              // it continues searching until the current node is null   
             while (current != null)
             {
-                int comparison = comparer.Compare(value, current.Value);
+                var comparison = comparer.Compare(value, current.Value);
                 //if the current node has a value return true
                 if (comparer.Compare(value, current.Value) == 0)
                 {
@@ -92,44 +92,60 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
         //DELETE METHOD:
         public bool Delete(T value)
         {
-            // Find the node to delete and its parent
-            Node parent = null;
-            Node current = root;
-            while (current != null && comparer.Compare(current.Value, value) != 0)
+            bool found;
+            (root, found) = DeleteHelp(root, value);
+            return found;
+        }
+
+        private (Node, bool) DeleteHelp(Node node, T value)
+        {
+            if (node == null)
             {
-                parent = current;
-                if (comparer.Compare(value, current.Value) < 0)
-                {
-                    current = current.LeftChild; // Move to the left subtree
-                }
-                else
-                {
-                    current = current.RightChild; // Move to the right subtree
-                }
+                return (null, false);
             }
 
-            // If the node is not found, return false
-            if (current == null)
+            var comparison = comparer.Compare(value, node.Value);
+            
+            if (comparison < 0)
             {
-                return false;
+                (node.LeftChild, bool found) = DeleteHelp(node.LeftChild, value);
+                return (node, found);
             }
-
-            // Disconnect the node from the tree
-            if (parent == null)
+            else if (comparison > 0)
             {
-                root = null; // Node is the root
-            }
-            else if (parent.LeftChild == current)
-            {
-                parent.LeftChild = null; // Node is left child
+                (node.RightChild, bool found) = DeleteHelp(node.RightChild, value);
+                return (node, found);
             }
             else
             {
-                parent.RightChild = null; // Node is right child
-            }
+                // Node to be deleted found
+                if (node.LeftChild == null)
+                {
+                    return (node.RightChild, true);
+                }
+                else if (node.RightChild == null)
+                {
+                    return (node.LeftChild, true);
+                }
 
-            return true; // Node found and deleted 
+                // Node with two children
+                Node replace = MinValueNode(node.RightChild);
+                node.Value = replace.Value;
+                (node.RightChild, _) = DeleteHelp(node.RightChild, replace.Value);
+                return (node, true);
+            }
         }
+
+        private Node MinValueNode(Node node)
+        {
+            Node current = node;
+            while (current.LeftChild != null)
+            {
+                current = current.LeftChild;
+            }
+            return current;
+        }
+
 
         
         //ITERATOR PATTERNS:
