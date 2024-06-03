@@ -92,6 +92,7 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
         //DELETE METHOD:
         public bool Delete(T value)
         {
+            // Call the helper method to perform the delete operation
             bool found;
             (root, found) = DeleteHelp(root, value);
             return found;
@@ -99,26 +100,33 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
 
         private (Node, bool) DeleteHelp(Node node, T value)
         {
+            // If the current node is null, return null and indicate that the node was not found
             if (node == null)
             {
                 return (null, false);
             }
 
+            // Compare the value to be deleted with the current node's value
             var comparison = comparer.Compare(value, node.Value);
             
             if (comparison < 0)
             {
+                // If the value is less than the current node's value, move to the left subtree 
                 (node.LeftChild, bool found) = DeleteHelp(node.LeftChild, value);
                 return (node, found);
             }
             else if (comparison > 0)
             {
+                // If the value is greater than the current node's value, move to the right subtree
                 (node.RightChild, bool found) = DeleteHelp(node.RightChild, value);
                 return (node, found);
             }
             else
             {
                 // Node to be deleted found
+                
+                // Node with only one child or no child
+
                 if (node.LeftChild == null)
                 {
                     return (node.RightChild, true);
@@ -130,8 +138,11 @@ public class TurboBinarySearchTree<T> : IEnumerable<T>
 
                 // Node with two children
                 Node replace = MinValueNode(node.RightChild);
+                
                 node.Value = replace.Value;
+                
                 (node.RightChild, _) = DeleteHelp(node.RightChild, replace.Value);
+                
                 return (node, true);
             }
         }
